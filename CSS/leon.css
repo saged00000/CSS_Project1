@@ -1,0 +1,754 @@
+/* Start Global Rules */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Work Sans", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --main-color: #10cab7;
+  --secondary-color: #2c4755;
+  --section-padding: 60px;
+  --section-margin: 100px;
+  --section-color: #f6f6f6;
+  --paragraph-color: #777;
+  --P-line-height: 1.6;
+  --border-color: #333;
+  --main-duration: 0.3s;
+}
+/* Start Global Rules */
+
+/* Start Components */
+
+/* Small */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+/* Medium */
+@media (min-width: 991px) {
+  .container {
+    width: 991px;
+  }
+}
+
+/* Large */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+.gridat {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.special-heading {
+  font-size: 100px;
+  color: #ebeced;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: -3px;
+  margin: 0;
+  opacity: 0;
+}
+
+.special-heading.animate {
+  animation: opahop 1s ease-in-out forwards;
+}
+.special-heading + p {
+  text-align: center;
+  color: #797979;
+  font-weight: 400;
+  margin: -30px 0 0 0;
+  opacity: 0;
+  font-size: 18px;
+}
+
+.special-heading + p.animate {
+  text-align: center;
+  color: #797979;
+  font-weight: 400;
+  margin: -30px 0 0 0;
+  opacity: 0;
+  font-size: 18px;
+  animation: opahup 1s ease-in-out forwards;
+  animation-delay: 0.2s;
+  /* chooses the first <P> next to the <h2> child */
+}
+
+@keyframes opahop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes opahup {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateY(0px);
+  }
+}
+
+@media (max-width: 767px) {
+  .special-heading,
+  .special-heading.animate {
+    font-size: 60px;
+  }
+  .special-heading + p,
+  .special-heading + p.animate {
+    font-size: 12px;
+    margin-top: -20px;
+  }
+}
+
+/* End Components */
+
+/* Start heading */
+.header {
+  padding: 20px;
+}
+
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header .logo {
+  width: 60px;
+}
+
+.header .links {
+  position: relative;
+  /* need to master "position" usage */
+}
+
+.header .container .links ul li:hover {
+  padding-left: 20px;
+}
+
+.header .container .links ul li:hover a {
+  color: rgb(76, 76, 218);
+  transition-duration: 0.5s;
+}
+
+.header .links ul {
+  list-style: none;
+  background-color: #cac7c7;
+  flex-direction: column; /* while no current display for ul, the default display for its parent is display flex: and will make its child default flex direction "column" while the default was (row) before this code */
+  min-width: 200px; /* the ul width here is 200px */
+  padding-left: 0px;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute; /* to make the ul never affects on others positions */
+  z-index: 1; /* to make the ul closer to the screen than other elements */
+  right: 0;
+  margin: 0;
+  padding: 0;
+  top: calc(100% + 20px);
+  /* make a space between the upper toggle icon and itself (15px) */
+  border-radius: 3%;
+}
+
+.header .links ul.open {
+  visibility: visible;
+  opacity: 1;
+  transition: var(--main-duration) ease-out;
+}
+/* class ".open" for the JS file */
+
+.header .links:hover {
+  cursor: pointer;
+}
+
+.header .links ul::before {
+  content: "";
+  border-width: 20px;
+  border-style: solid;
+  border-color: transparent transparent #cac7c7 transparent;
+  position: absolute;
+  right: 0px;
+  top: -35px;
+}
+
+.header .container .links ul li a {
+  text-decoration: none;
+  color: #514f4f;
+  transition-duration: 0.5s;
+}
+
+.header .container .links ul li {
+  padding: 15px 15px 15px 15px;
+  display: block;
+  transition: var(--main-duration);
+}
+
+.header .container .links ul li:not(:last-child) {
+  border-bottom: #7f7a7a solid 1px;
+}
+
+.header .links .icon {
+  width: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  /* the 3 icon lines are wrapped not Adjacent to one another*/
+  justify-content: flex-end;
+  /* icon starts from right to left */
+}
+
+.header .links .icon span {
+  background-color: var(--paragraph-color);
+  margin-bottom: 3px;
+  height: 2px;
+  width: 100%;
+}
+
+.header .links .icon span:first-child {
+  width: 100%;
+}
+
+.header .links .icon span:nth-child(2) {
+  width: 60%;
+  transition: var(--main-duration);
+}
+
+.header .links:hover span:nth-child(2) {
+  /* make the 2st resize to 100% width when your hover on it */
+  width: 100%;
+}
+
+.header .links .icon span:last-child {
+  width: 100%;
+}
+
+/* End heading */
+
+/* start landing Section */
+
+.landing {
+  background-image: url(../images/whiblad.jpg);
+  /* remeber, you must upload files that had the lowest size for the responsive and fast website */
+  background-size: cover;
+  /* covers the entire page, no white spaces at edges */
+  height: calc(100vh - 64px);
+  /* covers a 100% of the page except 64px (for the heading above) this means that the background image will take a "page" height and any element added after it will require a vertical slidebar*/
+  position: relative;
+  /* this important for the intro-text cuz its "absolute" position based on body so currently we need to make it based on .landing instead by adding this code */
+}
+
+.landing .intro-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  width: 320px;
+  max-width: 100%; /* to wrap the text if the screen is smaller than the element width */
+  transform: translate(-50%, -50%);
+}
+
+.landing .intro-text h1 {
+  margin: 0;
+  font-size: 50px;
+  font-weight: bold;
+  color: var(--main-color);
+  animation: showdown 1.5s ease-in-out forwards;
+  opacity: 0;
+}
+
+.landing .intro-text p {
+  font-size: 19px;
+  line-height: var(--P-line-height);
+  animation: showdown 1.5s ease-in-out forwards;
+  animation-delay: 0.5s; /* a 0.5s delay after the page refesh/open */
+  opacity: 0;
+}
+
+.features {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  background-color: var(--section-color);
+}
+
+.features .container.gridat {
+  gap: 20px;
+}
+
+.features .container .feat {
+  padding: 20px;
+  text-align: center;
+  opacity: 0;
+  max-width: 100%;
+}
+
+.features .container .feat i {
+  color: var(--main-color);
+}
+
+.features .container .feat h3 {
+  font-weight: 800;
+  margin: 30px 0;
+  /* margin top and bottom h3 is 30px , left and right margin is 0 */
+}
+
+.features .container .feat p {
+  line-height: var(--P-line-height);
+  font-size: 17px;
+  color: var(--paragraph-color);
+}
+
+@keyframes showdown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px); /* from up (-20) */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* to bottom (0 .. the original position ) */
+  }
+}
+
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideFrombottom {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.features .feat.animate:nth-child(1) {
+  animation: slideFromLeft 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  /* check this website "cubic-bezier.com" this function works like cubic-bezier(x1, y1, x2, y2), "X" is the time 0 is the first, 1 is the last second ,Y is the progress , 0 is the first 1 is the last progress (can be more than 1) */
+  /* JS file will add that "animate" class never mind */
+}
+
+.features .feat.reveal.animate:nth-child(2) {
+  animation: slideFrombottom 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--main-duration);
+}
+
+.features .feat.reveal.animate:nth-child(3) {
+  animation: slideFromRight 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Start services */
+
+.services {
+  padding-bottom: var(--section-padding);
+  padding-top: var(--section-padding);
+}
+
+.services .services-content.gridat {
+  margin-top: var(--section-margin);
+  gap: 30px;
+}
+
+.services .services-content .srv {
+  display: flex;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 767px) {
+  .services .services-content .srv {
+    text-align: center; /* for the text */
+    flex-direction: column; /* vertical design, for responsive */
+    align-items: center; /* for the icon */
+  }
+}
+
+.services .services-content .srv i {
+  color: var(--main-color);
+  flex-basis: 60px;
+  /* if "flex-direction" is "column" it works as height, if "row" it works as width */
+}
+
+.services .services-content .srv .text {
+  flex: 1;
+  /* works as, flex basis: 0% , flex-shrink: 1 , flex-grow: 1 ("flex-grow" is the changing value, flex: 2 = flex-grow: 2...) */
+}
+
+.services .services-content .srv .text h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.services .services-content .srv .text p {
+  color: var(--paragraph-color);
+  font-weight: 300;
+  line-height: var(--P-line-height);
+}
+
+.col-img-pa {
+  text-align: center;
+  position: relative;
+  border-radius: 8px;
+}
+
+.col-img-pa.animate::before {
+  position: absolute;
+  content: "";
+  background-color: var(--secondary-color);
+  width: 100px;
+  right: 0px;
+  height: calc(100% + 100px);
+  top: -50px;
+  z-index: -1;
+  opacity: 0;
+  animation: co-ig-bf 1.2s forwards ease-in-out;
+}
+
+@keyframes co-ig-bf {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+.col-img {
+  display: block;
+  border: var(--border-color) solid 5px;
+  width: 260px;
+  max-width: 100%;
+  margin: auto;
+}
+
+@media (max-width: 1000px) {
+  .dis-img.animate::before {
+    display: none;
+  }
+}
+
+.srv.reveal {
+  opacity: 0;
+}
+
+.srv.reveal.animate {
+  animation: srv-text 1s ease-in-out forwards;
+  opacity: 0;
+}
+
+.srv.srv1.reveal.animate {
+  animation-delay: 0.1s;
+}
+
+.srv.srv2.reveal.animate {
+  animation-delay: 0.2s;
+}
+
+.srv.srv3.reveal.animate {
+  animation-delay: 0.4s;
+}
+
+.srv.srv4.reveal.animate {
+  animation-delay: var(--main-duration);
+}
+
+@keyframes srv-text {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* End services */
+
+/* Start portfolio */
+
+.portfolio {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  background-color: var(--section-color);
+}
+
+.portfolio .portfolio-content.gridat {
+  gap: 30px;
+  margin-top: var(--section-margin);
+  align-items: start;
+  /* to start cards from up, because when a card higher than another it increases its own height only and from up to bottom (start to end) */
+}
+
+.portfolio .portfolio-content .card {
+  background-color: aliceblue;
+  border: var(--secondary-color) solid 5px;
+}
+.portfolio .portfolio-content .card img {
+  width: 100%;
+  border: var(--border-color) solid 3px;
+}
+
+.portfolio .portfolio-content .card .info {
+  text-align: center;
+  padding: 20px;
+  font-family: "Almarai", sans-serif;
+}
+
+.portfolio .portfolio-content .card .info h3 {
+  margin: 0%;
+}
+
+.portfolio .portfolio-content .card .info p {
+  color: var(--paragraph-color);
+  line-height: var(--P-line-height);
+  margin-bottom: 0;
+}
+
+/* End portfolio */
+
+/* Start about */
+
+.about {
+  padding-top: var(--section-padding);
+  padding-bottom: calc(var(--section-padding) + 60px);
+}
+
+.about .about-content {
+  margin-top: var(--section-margin);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@media (max-width: 991px) {
+  .about .about-content {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+}
+
+.about .about-content .image {
+  position: relative;
+  width: 250px;
+  height: 375px;
+  border: var(--border-color) solid 3px;
+}
+
+@media (max-width: 991px) {
+  .about .about-content .image {
+    margin: 0 auto 60px auto;
+  }
+}
+
+.about .about-content .image img {
+  max-width: 100%;
+  display: block;
+}
+
+.about .about-content .image.animate::before {
+  content: "";
+  width: 80px;
+  height: calc(100% + 100px);
+  top: -40px;
+  z-index: -1;
+  left: -10px;
+  position: absolute;
+  background-color: #ebeced;
+  opacity: 0;
+  animation: about-bf 1.2s forwards ease-in-out;
+}
+
+@keyframes about-bf {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+.about .about-content .image.animate::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 270px;
+  border-left: 80px solid var(--main-color);
+  border-bottom: 80px solid var(--main-color);
+  z-index: -1;
+  right: -130px;
+  top: -20px;
+  animation: about-af 1.2s forwards ease-in-out;
+}
+
+@media (max-width: 767px) {
+  .about .about-content .image.animate::after {
+    width: 30px;
+    height: 270px;
+    border-left: 50px solid var(--main-color);
+    border-bottom: 0px;
+    right: -50px;
+    top: -10px;
+    animation: about-af-mob 1.2s forwards ease-in-out;
+  }
+}
+
+@keyframes about-af-mob {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes about-af {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+.about .about-content .text {
+  flex-basis: calc(100% - 500px);
+}
+
+.about .about-content .text p:first-of-type {
+  color: var(--paragraph-color);
+  font-weight: bold;
+  line-height: var(--P-line-height);
+  margin-bottom: 40px;
+}
+
+.about .about-content .text hr {
+  width: 50%;
+  border-color: var(--main-color);
+  display: inline-block;
+}
+
+.about .about-content .text p:last-of-type {
+  color: var(--paragraph-color);
+  line-height: var(--P-line-height);
+  margin-bottom: 0;
+}
+
+.contact {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  background-color: var(--section-color);
+}
+
+.contact .info {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  text-align: center;
+}
+
+.contact .info .label {
+  font-size: 35px;
+  font-weight: 800;
+  color: var(--secondary-color);
+  letter-spacing: -1.5px;
+  margin-bottom: 15px;
+}
+
+.contact .info .link {
+  display: block;
+  font-size: 35px;
+  font-weight: 800;
+  color: var(--main-color);
+  text-decoration: none;
+}
+
+.contact .info .social {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.contact .info .social i {
+  margin-left: 10px;
+  color: var(--secondary-color);
+}
+
+@media (max-width: 767px) {
+  .contact .info .label,
+  .contact .info .link {
+    font-size: 25px;
+  }
+}
+
+/* Start footer */
+.footer {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 30px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.footer span {
+  font-weight: bold;
+  color: var(--main-color);
+}
+/* End footer */
+
+/* additional external code */
+.feat,
+.srv,
+.card {
+  will-change: transform, opacity;
+}
